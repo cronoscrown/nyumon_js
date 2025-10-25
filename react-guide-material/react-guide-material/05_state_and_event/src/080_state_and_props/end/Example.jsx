@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 // POINT stateとpropsの利用ケース
 // コンポーネントが消滅する可能性がある時。
@@ -23,7 +24,7 @@ const Count = ({ title, count, setCount }) => {
     setCount((prevstate) => prevstate + 1);
   };
   const countDown = () => {
-    setCount(count - 1);
+    setCount((prevstate) => prevstate - 1);
   };
   return (
     <>
@@ -34,6 +35,12 @@ const Count = ({ title, count, setCount }) => {
       <button onClick={countDown}>-</button>
     </>
   );
+};
+
+Count.propTypes = {
+  title: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+  setCount: PropTypes.func.isRequired,
 };
 
 export default Example;
