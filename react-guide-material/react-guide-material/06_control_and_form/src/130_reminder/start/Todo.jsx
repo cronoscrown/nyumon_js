@@ -1,5 +1,6 @@
-const Todo = () => {
-  const todosList = [
+const Todo = ({task, setTask, defaultTasks
+}) => {
+  const defaultTasks = [
     {
       id: 1,
       content: "店予約する",
@@ -14,3 +15,5 @@ const Todo = () => {
     },
   ];
 };
+
+export default Todo;
