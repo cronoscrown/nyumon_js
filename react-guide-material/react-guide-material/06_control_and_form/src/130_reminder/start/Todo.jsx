@@ -1,19 +1,19 @@
-const Todo = ({task, setTask, defaultTasks
-}) => {
-  const defaultTasks = [
-    {
-      id: 1,
-      content: "店予約する",
-    },
-    {
-      id: 2,
-      content: "卵買う",
-    },
-    {
-      id: 3,
-      content: "郵便出す",
-    },
-  ];
+const Todo = ([todo],setTodo,) => {
+
+  const trimTask = () => {
+    setTodo(todo.pop(todo.id))
+  }
+
+ 
+  return (
+    <ul>
+      todo.map({todo}) =
+        <li key={todo.id}>
+          <button onClick={trimTask}>完了</button>{todo.content}
+        </li>
+      
+    </ul>
+  );
 };
 
 export default Todo;
