@@ -11,14 +11,23 @@ const BaseButton = styled.button`
   height: 60px;
   font-weight: bold;
   cursor: pointer;
+
+  @media (max-width: 600px) {
+    border-radius: 0;
+  }
 `;
 
 const StyledButton = styled(BaseButton)`
   background-color: ${({ $isSelected }) => $isSelected ? 'pink' : '#ffffff'};
+
 `;
 
-const OrangeButton = styled(BaseButton)`
-  background-color: orange;
+const RedButton = styled(BaseButton)`
+  background-color: red;
+  :hover  {
+    background-color: darkred;
+    opacity: 0.7;
+  }
 `;
   
 const Example = () => {
@@ -29,7 +38,7 @@ const Example = () => {
   return (
     <>
       <StyledButton $isSelected={isSelected} onClick={clickHandler}>ボタン</StyledButton>
-      <OrangeButton $isSelected={isSelected} onClick={clickHandler}>ボタン</OrangeButton>
+      <RedButton $isSelected={isSelected} onClick={clickHandler}>ボタン</RedButton>
       <button
         className={`btn ${isSelected ? "selected" : ""}`}
         onClick={clickHandler}
