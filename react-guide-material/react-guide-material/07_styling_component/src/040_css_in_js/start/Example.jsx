@@ -14,17 +14,12 @@ const BaseButton = styled.button`
 `;
 
 const StyledButton = styled(BaseButton)`
-  background-color: ${({ isSelected }) => isSelected ? 'pink' : '#ffffff'};
+  background-color: ${({ $isSelected }) => $isSelected ? 'pink' : '#ffffff'};
 `;
 
 const OrangeButton = styled(BaseButton)`
   background-color: orange;
 `;
-
-
-const OrangeButton = styled(StyledButton)`
-  background: red;
-  `;
   
 const Example = () => {
   const [isSelected, setIsSelected] = useState(false);
