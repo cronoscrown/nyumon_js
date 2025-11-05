@@ -5,9 +5,15 @@ const Example = () => {
 
   useEffect(() => {
     console.log('useEffect is called');
-    window.setInterval(() => {
+    const intervalId = setInterval(() => {
       setTime(prev => prev + 1);
     }, 1000);
+    
+    // ✅ クリーンアップ関数を追加
+    return () => {
+      console.log('タイマーをクリーンアップします');
+      clearInterval(intervalId);
+    };
   }, [])
   
   useEffect(() => {
