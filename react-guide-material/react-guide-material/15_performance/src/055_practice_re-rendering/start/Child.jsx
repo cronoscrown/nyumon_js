@@ -1,6 +1,6 @@
 import React from "react";
 
-const Child = ({ countB, onClick }) => {
+const Child = React.memo(({ countB, onClick }) => {
   console.log("%cChild render", "color: red;");
 
   return (
@@ -10,6 +10,6 @@ const Child = ({ countB, onClick }) => {
       <p>ボタンBクリック回数：{countB}</p>
     </div>
   );
-};
+});
 
 export default Child;

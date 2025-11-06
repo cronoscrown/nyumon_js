@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import todoApi from "../api/todo";
 
 const TodoContext = createContext();
 const TodoDispatchContext = createContext();
@@ -42,6 +43,13 @@ const todoReducer = (todos, action) => {
 
 const TodoProvider = ({ children }) => {
   const [todos, dispatch] = useReducer(todoReducer, todosList);
+
+  useEffect(() => {
+    // 初期データをセット
+    todoApi.getAll().then((todos) => {
+      dispatch({ type: "todo/init", todos });
+    }); 
+  }, []);
 
   return (
     <TodoContext.Provider value={todos}>

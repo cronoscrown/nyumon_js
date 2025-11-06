@@ -1,0 +1,63 @@
+# JSONサーバー テスト用ファイル
+# 正常に動作する基本的なAPIテスト
+
+@baseUrl = http://localhost:3003
+
+### 1. サーバーが正常に動作しているかテスト
+GET {{baseUrl}}/
+
+### 2. 全ユーザーを取得
+GET {{baseUrl}}/user
+
+### 3. 特定のユーザーを取得
+GET {{baseUrl}}/user/1
+
+### 4. 新しいユーザーを作成
+# @name newUser
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+  "username": "REST Clientテストユーザー",
+  "age": 25,
+  "hobbies": ["API開発", "テスト"],
+  "premiumAccount": false
+}
+
+### 5. 作成したユーザーの確認
+GET {{baseUrl}}/user/{{newUser.response.body.id}}
+
+### 6. ユーザー情報の更新
+PUT {{baseUrl}}/user/{{newUser.response.body.id}}
+Content-Type: application/json
+
+{
+  "username": "更新されたテストユーザー",
+  "age": 30,
+  "hobbies": ["REST Client", "JSON Server"],
+  "premiumAccount": true
+}
+
+### 7. 部分的な更新（PATCH）
+PATCH {{baseUrl}}/user/{{newUser.response.body.id}}
+Content-Type: application/json
+
+{
+  "age": 28
+}
+
+### 8. ユーザーの削除
+DELETE {{baseUrl}}/user/{{newUser.response.body.id}}
+
+### 9. TODOの取得
+GET {{baseUrl}}/todo
+
+### 10. 新しいTODOの作成
+POST {{baseUrl}}/todo
+Content-Type: application/json
+
+{
+  "content": "REST Client経由で作成したTODO",
+  "editing": false,
+  "completed": false
+}

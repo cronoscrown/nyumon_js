@@ -1,0 +1,57 @@
+# REST Client テストファイル
+# ここにHTTPリクエストを記述します
+
+### ユーザー一覧取得
+GET http://localhost:3003/user
+
+### 特定のユーザー取得
+GET http://localhost:3003/user/1
+
+### 新しいユーザー作成
+POST http://localhost:3003/user
+Content-Type: application/json
+
+{
+  "username": "新しいユーザー",
+  "age": 25,
+  "hobbies": ["読書", "映画鑑賞"],
+  "premiumAccount": false
+}
+
+### ユーザー情報更新
+PUT http://localhost:3003/user/1
+Content-Type: application/json
+
+{
+  "username": "更新されたユーザー",
+  "age": 30,
+  "hobbies": ["プログラミング", "ゲーム"],
+  "premiumAccount": true
+}
+
+### ユーザー削除
+DELETE http://localhost:3003/user/1
+
+### カスタムヘッダー付きリクエスト
+GET http://localhost:3003/user
+Authorization: Bearer your-token-here
+User-Agent: VS Code REST Client
+Accept: application/json
+
+###
+# 変数の使用例
+@baseUrl = http://localhost:3003
+@userId = 2
+
+GET {{baseUrl}}/user/{{userId}}
+
+###
+# クエリパラメータの例
+GET http://localhost:3003/user?age=20&premiumAccount=true
+
+###
+# フォームデータの送信
+POST http://localhost:3003/user
+Content-Type: application/x-www-form-urlencoded
+
+username=form-user&age=28&hobbies=cooking

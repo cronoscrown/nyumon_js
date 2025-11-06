@@ -1,5 +1,17 @@
 import { useState } from "react";
-import "./Example.css";
+import  "./Example.css";
+import { StrictMode } from "react";
+
+
+
+const StrictModeTest = () => {
+  return (
+    <StrictMode>
+      <Example />
+    </StrictMode>
+  );
+}
+
 
 const Example = () => {
   console.log("render");
@@ -22,9 +34,9 @@ const Example = () => {
         <button
           onClick={() => {
             setCountA(prev => {
-              const newState = { ...prev };
-              // prev.val = 1;
-              return newState;
+                  // const newState = { ...prev };
+                  // prev.val = 1;
+              return {...prev, val: prev.val + 1};
             });
           }}
         >
@@ -39,3 +51,4 @@ const Example = () => {
 };
 
 export default Example;
+export { StrictModeTest };

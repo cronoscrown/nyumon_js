@@ -1,0 +1,14 @@
+# Final Connection Test
+@baseUrl = http://localhost:3003
+
+### Test 1: Get all users
+GET {{baseUrl}}/user
+
+### Test 2: Get all todos  
+GET {{baseUrl}}/todo
+
+### Test 3: Get specific user
+GET {{baseUrl}}/user/1
+
+### Test 4: Check server root
+GET {{baseUrl}}/

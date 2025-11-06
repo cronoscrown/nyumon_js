@@ -1,0 +1,82 @@
+# 環境変数を使ったAPI テスト
+@baseUrl = http://localhost:3003
+
+### 開発環境でのユーザー取得
+GET {{baseUrl}}/user
+Authorization: Bearer {{login.response.body.token}}
+
+### 認証テスト
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpass"
+}
+
+### レスポンスからトークンを取得して次のリクエストで使用
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### 前のリクエストのレスポンスを使用
+GET {{baseUrl}}/protected
+Authorization: Bearer {{login.response.body.token}}
+
+### エラーハンドリングテスト
+GET {{baseUrl}}/user/99999
+Accept: application/json
+
+### バッチリクエスト（複数のリクエストを連続実行）
+### 1. ユーザー作成
+# @name createUser
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+  "username": "batch-user",
+  "age": 25,
+  "hobbies": ["testing"],
+  "premiumAccount": false
+}
+
+### 2. 作成したユーザーの確認
+GET {{baseUrl}}/user/{{createUser.response.body.id}}
+
+### 3. 作成したユーザーの更新
+PUT {{baseUrl}}/user/{{createUser.response.body.id}}
+Content-Type: application/json
+
+{
+  "username": "updated-batch-user",
+  "age": 26,
+  "hobbies": ["testing", "automation"],
+  "premiumAccount": true
+}
+
+### 4. 作成したユーザーの削除
+DELETE {{baseUrl}}/user/{{createUser.response.body.id}}
+
+### GraphQLサンプル（GraphQLエンドポイントがある場合）
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query GetUsers { users { id username age } }"
+}
+
+### ファイルアップロードサンプル
+POST {{baseUrl}}/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test.txt"
+Content-Type: text/plain
+
+< ./test.txt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
